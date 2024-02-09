@@ -6,8 +6,19 @@ inventory = {
         1: {
             "name": "egg",
             "price": 3.99,
-            "branch": "Regular"
-        }
+            "brand": "Regular"
+        },
+        2: {
+            "name": "milk",
+            "price": 7.99,
+            "brand": "Imported"
+
+        },
+        3: {
+            "name": "bread",
+            "price": 2.99,
+            "brand": "Local"
+        },
     }
 
 
