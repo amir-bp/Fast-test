@@ -2,29 +2,56 @@ from fastapi import FastAPI, Path
 
 app = FastAPI()
 
+
+
 inventory = {
-        1: {
+        "1": {
             "name": "egg",
             "price": 3.99,
             "brand": "Regular"
         },
-        2: {
+        "2": {
             "name": "milk",
             "price": 7.99,
             "brand": "Imported"
 
-        },
-        3: {
-            "name": "bread",
-            "price": 2.99,
-            "brand": "Local"
-        },
+        }
     }
 
 
+
+# inventory = {
+#         1: {
+#             "name": "egg",
+#             "price": 3.99,
+#             "brand": "Regular"
+#         },
+#         2: {
+#             "name": "milk",
+#             "price": 7.99,
+#             "brand": "Imported"
+
+#         },
+#         3: {
+#             "name": "bread",
+#             "price": 2.99,
+#             "brand": "Local"
+#         },
+#     }
+
+
+@app.get("/get-all-items")
+def get_all_items():
+    return inventory
+
+
+
 @app.get("/get-item/{item_id}")
-def get_item(item_id: int = Path(description = "The ID of the item you'd like to view.", gt=0, lt=2)):
+def get_item(item_id: str = Path(description = "The ID of the item you'd like to view.")):
     return inventory[item_id]
+
+
+
 
 
 @app.get("/get-by-name")
@@ -35,7 +62,11 @@ def get_item(name: str):
     return {'Data': 'Not Found'}
 
 
+@app.post("/create-item/{item_id}")
+def create_item(item_id: int, name: str, price: float, brand: str):
 
+    inventory[item_id] = {"name": name, "price": price, "brand": brand}
+    return inventory[item_id]
 
 
 
