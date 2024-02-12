@@ -21,7 +21,26 @@ def test_read_all_items():
     assert response.json() == {**inventory}
 
 
+
 def test_create_item():
-    response = client.post("/create-item/3", json={"item_id": 3, "name": "water", "price": 1.99, "brand": "dairy"})
+    item_data = {
+        "name": "milk",
+        "price": 7.99,
+        "brand": "Imported"
+    }
+    response = client.post("/create-item", json=item_data)
+    if response.status_code == 200:
+        print(response.json())
     assert response.status_code == 200
-    assert response.json() == {**inventory[3]}
+    assert response.json() == {"name": "milk", "price": 7.99, "brand": "Imported"}
+
+
+
+
+
+# def test_create_item():
+#     response = client.post("/create-item", json={"name": "milk", "price": 7.99, "brand": "Imported"})
+#     if response.status_code == 422:
+#         print(response.json())
+#     assert response.status_code == 200
+#     assert response.json() == {inventory["2"]}

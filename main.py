@@ -1,7 +1,15 @@
 from fastapi import FastAPI, Path
 
+from pydantic import BaseModel
+
 app = FastAPI()
 
+
+
+class ItemCreate(BaseModel):
+    name: str
+    price: float
+    brand: str
 
 
 inventory = {
@@ -62,11 +70,23 @@ def get_item(name: str):
     return {'Data': 'Not Found'}
 
 
-@app.post("/create-item/{item_id}")
-def create_item(item_id: int, name: str, price: float, brand: str):
 
-    inventory[item_id] = {"name": name, "price": price, "brand": brand}
+
+@app.post("/create-item")
+def create_item(item_data: ItemCreate):
+    item_id = str(len(inventory) + 1)
+    inventory[item_id] = {"name": item_data.name, "price": item_data.price, "brand": item_data.brand}
     return inventory[item_id]
+
+
+
+
+
+# @app.post("/create-item")
+# def create_item(name: str, price: float, brand: str):
+#     item_id = str(len(inventory) + 1)
+#     inventory[item_id] = {"name": name, "price": price, "brand": brand}
+#     return inventory[item_id]
 
 
 
