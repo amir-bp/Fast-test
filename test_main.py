@@ -1,3 +1,4 @@
+import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
@@ -21,6 +22,30 @@ def test_read_all_items():
     assert response.json() == {**inventory}
 
 
+''' Farzam bhai can you please help me with this code. yahan par men name likh kr data lena chah rha hu, route men data
+    show horha hai, lekin test fail horha hai for some reason.
+ '''
+def test_read_by_name():
+    response = client.get("/get-by-name")
+    item_id = inventory["1"]['name']
+    assert response.status_code == 200
+    assert response.json() == {item_id}
+    
+
+
+
+
+# @pytest.mark.parametrized("name, expected_status_code" [
+#     {
+#         "egg", 200
+#     }
+# ])
+# def test_read_by_name(name, expected_status_code):
+#     response = client.get(f"/get-by-name?name={name}")
+#     # item_name = inventory[item_id]['name']
+#     assert response.status_code == expected_status_code
+#     assert response.json() == {"name": "egg", "price": 3.99, "brand": "Regular"}
+
 
 def test_create_item():
     item_data = {
@@ -36,11 +61,3 @@ def test_create_item():
 
 
 
-
-
-# def test_create_item():
-#     response = client.post("/create-item", json={"name": "milk", "price": 7.99, "brand": "Imported"})
-#     if response.status_code == 422:
-#         print(response.json())
-#     assert response.status_code == 200
-#     assert response.json() == {inventory["2"]}

@@ -1,6 +1,6 @@
-from fastapi import FastAPI, Path
-
+from fastapi import FastAPI
 from pydantic import BaseModel
+
 
 app = FastAPI()
 
@@ -55,13 +55,14 @@ def get_all_items():
 
 
 @app.get("/get-item/{item_id}")
-def get_item(item_id: str = Path(description = "The ID of the item you'd like to view.")):
+def get_item(item_id: str):
     return inventory[item_id]
 
+# name = item_search.name
 
 
 
-
+# def get_item(name: ItemCreate):
 @app.get("/get-by-name")
 def get_item(name: str):
     for item_id in inventory:
