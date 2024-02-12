@@ -58,12 +58,11 @@ def get_all_items():
 def get_item(item_id: str):
     return inventory[item_id]
 
-# name = item_search.name
 
 
 
 # def get_item(name: ItemCreate):
-@app.get("/get-by-name")
+@app.get("/get-by-name/{name}")
 def get_item(name: str):
     for item_id in inventory:
         if inventory[item_id]['name'] == name:

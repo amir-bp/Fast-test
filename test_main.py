@@ -26,10 +26,10 @@ def test_read_all_items():
     show horha hai, lekin test fail horha hai for some reason.
  '''
 def test_read_by_name():
-    response = client.get("/get-by-name")
-    item_id = inventory["1"]['name']
+    response = client.get("/get-by-name/egg")
+    # item_id = inventory["1"]
     assert response.status_code == 200
-    assert response.json() == {item_id}
+    assert response.json() == {**inventory["1"]}
     
 
 
