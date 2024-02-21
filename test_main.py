@@ -1,4 +1,4 @@
-import pytest
+# import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
@@ -34,19 +34,6 @@ def test_read_by_name():
 
 
 
-
-# @pytest.mark.parametrized("name, expected_status_code" [
-#     {
-#         "egg", 200
-#     }
-# ])
-# def test_read_by_name(name, expected_status_code):
-#     response = client.get(f"/get-by-name?name={name}")
-#     # item_name = inventory[item_id]['name']
-#     assert response.status_code == expected_status_code
-#     assert response.json() == {"name": "egg", "price": 3.99, "brand": "Regular"}
-
-
 def test_create_item():
     item_data = {
         "name": "milk",
@@ -54,8 +41,8 @@ def test_create_item():
         "brand": "Imported"
     }
     response = client.post("/create-item", json=item_data)
-    if response.status_code == 200:
-        print(response.json())
+    # if response.status_code == 200:
+    #     print(response.json())
     assert response.status_code == 200
     assert response.json() == {"name": "milk", "price": 7.99, "brand": "Imported"}
 
